@@ -1,0 +1,30 @@
+<!-- フラッシュメッセージ表示設定 -->
+<div>
+    <%= flash[:notice] %>
+</div>
+
+<!-- render [部分テンプレートファイルの指定], [ローカル変数]:[渡す値] -->
+<%= render 'books/info', user: @user %>
+<%= render 'books/new' , book: Book.new %>
+
+<h1>Books</h1>
+
+<% @books.each do |book| %>
+  <p>Title</p>
+  <!-- bookの詳細画面へのリンク-->
+  <%= link_to book_path(book) do %>
+      <%= book.title %>
+  <% end %>
+
+  <p>Opinion</p>
+  <span><%= book.body %></span>
+
+  <div>
+    <!-- userの画像-->
+    <%= link_to user_path(book.user) do %>
+      <%= image_tag @user.get_profile_image(100, 100) %>
+    <% end %>
+  </div>
+<% end %>
+
+

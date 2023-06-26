@@ -1,0 +1,28 @@
+<!-- フラッシュメッセージ表示設定 -->
+<div>
+    <%= flash[:notice] %>
+</div>
+
+<!-- render [部分テンプレートファイルの指定], [ローカル変数]:[渡す値] -->
+<%= render 'info', user: @user %>
+<%= render 'new' , book: Book.new %>
+
+<h1>Book detail</h1>
+
+<!-- userの詳細画面へのリンク-->
+<%= link_to user_path(@book.user) do %>
+    <!-- 画像 -->
+   <%= image_tag @book.user.get_profile_image(100, 100) %>
+<% end %>
+
+<!-- bookの詳細画面へのリンク-->
+<%= link_to book_path(@book) do %>
+    <%= @book.title %>
+<% end %>
+
+<%= @book.body %>
+<% if @book.user == current_user %>
+    <%= link_to "編集", edit_book_path(@book.id) %>
+    <%= link_to "削除", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+<% end %>
+

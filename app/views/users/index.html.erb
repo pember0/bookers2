@@ -1,0 +1,18 @@
+<%= render 'books/info', user: @user %>
+<%= render 'books/new' , book: @book %>
+
+<h1>Users</h1>
+
+<% @users.each do |user| %>
+<p>image</p>
+<!-- userの画像 -->
+<%= image_tag user.get_profile_image(100, 100) %>
+
+<p>name</p>
+<span><%= user.name %></span>
+
+
+  <!-- userの詳細画面へのリンク-->
+  <%= link_to "show", user_path(user) %>
+
+<% end %>
