@@ -3,28 +3,47 @@
     <%= flash[:notice] %>
 </div>
 
-<!-- render [部分テンプレートファイルの指定], [ローカル変数]:[渡す値] -->
-<%= render 'books/info', user: @user %>
-<%= render 'books/new' , book: Book.new %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <!-- render [部分テンプレートファイルの指定], [ローカル変数]:[渡す値] -->
+      <%= render 'books/info', user: @user %>
+      <%= render 'books/new' , book: Book.new %>
+    </div>
 
-<h1>Books</h1>
+    <div class="col-md-8 offset-md-1">
+     <h1>Books</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
 
-<% @books.each do |book| %>
-  <p>Title</p>
-  <!-- bookの詳細画面へのリンク-->
-  <%= link_to book_path(book) do %>
-      <%= book.title %>
-  <% end %>
+        <tbody>
+          <% @books.each do |book| %>
+            <tr>
+              <td>
+                <!-- userの画像-->
+                <%= link_to user_path(book.user) do %>
+                  <%= image_tag @user.get_profile_image(100, 100) %>
+                <% end %>
+              </td>
 
-  <p>Opinion</p>
-  <span><%= book.body %></span>
-
-  <div>
-    <!-- userの画像-->
-    <%= link_to user_path(book.user) do %>
-      <%= image_tag @user.get_profile_image(100, 100) %>
-    <% end %>
+              <!-- bookの詳細画面へのリンク-->
+              <td>
+                <%= link_to book_path(book) do %>
+                    <%= book.title %>
+                <% end %>
+              </td>
+              <td><%= book.body %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-<% end %>
+</div>
 
 
