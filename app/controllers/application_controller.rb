@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:top, :about]
-# devise利用の機能（ユーザ登録、ログイン認証など）使用前にconfigure_permitted_parametersメソッドを実行
-before_action :configure_permitted_parameters, if: :devise_controller?
+  # devise利用の機能（ユーザ登録、ログイン認証など）使用前にconfigure_permitted_parametersメソッドを実行
+  before_action :configure_permitted_parameters, if: :devise_controller?
   # Sign up・Log in後にどこに遷移するかを設定しているメソッド
   def after_sign_in_path_for(resource)
     user_path(current_user)  # ユーザーの詳細画面
